@@ -5,7 +5,7 @@ import './style.css';
 
 
 
-// const API_KEY = 'b71661f27a7080f087d50221b686a16e4549cebfd6d9edc870065558542e9ba9'
+
 const API_KEY = process.env.REACT_APP_API_KEY; 
 
  class SearchBar extends Component {
