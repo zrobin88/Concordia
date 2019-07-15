@@ -1,11 +1,16 @@
 body{
-    background-image: linear-gradient(rgb(214, 237, 237),rgb(15, 124, 148));
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
     justify-content: center;
     align-items: center; 
 }
+.header{
+    
+    background-image: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    height:20%;
+}
 .search-container{
    position: relative;
-   left:43%;
+   left:35%;
    
     align-items: center;
     margin-bottom:20px;
@@ -22,12 +27,13 @@ body{
 
 .image-wrapper{
     
-    border: 5px solid #CCCCCC ;
+    border: 5px solid aqua;
             box-sizing: border-box ;
-            height: 50% ;
+            height: 60% ;
             overflow: auto ;
             width: 80% ;
 }
 .jumbotron-fluid{
     justify-content: center
 }
+

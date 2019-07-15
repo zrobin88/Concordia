@@ -6,8 +6,11 @@ import Header from './Header'
 class App extends Component {
     render() {
       return (
-      <SearchBar/>   
-      
+      <div>
+      <Header />
+   
+
+      </div>
       );
     }
   }

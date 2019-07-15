@@ -39,14 +39,15 @@ const API_KEY = process.env.REACT_APP_API_KEY;
       <div>
           <form onSubmit={this.handleSubmit} className="search-container">
                   <input
-                        class="field-container"
+                        class="field-container text-dark"
                         type='text'
                         id='search-bar'
+                        style={{'border-radius':'20px', width:'30%', justifyContent:'center'}}
                         value={this.state.value}
                         placeholder="Search Images..."
                         onChange={this.handleChange}/>
              
-          <button className="btn-success btn-large" type="submit">submit<i class="fa fa-search"></i></button>
+          <button className="btn-success btn-large" style={{'border-radius': '25px'}}type="submit">Search<i class="fa fa-search"></i></button>
           </form>
           <SearchResults results={this.state.searchResult}/>
       </div>
