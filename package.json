@@ -2,7 +2,7 @@
   "name": "image-search",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ShanteDenise.github.io/Image-Search-Using-Api/",
+  "homepage": "https://github.com/zrobin88",
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.2.0",
@@ -19,7 +19,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "aws s3 cp --recursive ./build s3://zrunsplashsearch.com"
   },
   "eslintConfig": {
     "extends": "react-app"

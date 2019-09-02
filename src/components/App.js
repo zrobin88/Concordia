@@ -3,12 +3,16 @@ import SearchBar from './SearchBar';
 import './style.css';
 import Header from './Header'
 
+
 class App extends Component {
+
+
+
     render() {
       return (
       <div>
       <Header />
-   
+      <SearchBar />
 
       </div>
       );

@@ -1,44 +1,28 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './style.css'
+import axios from 'axios'
 
-class SearchResults extends Component{
+const lfmKey = "e193748e40aa0cc6cfb11593cff93a81"
+class TopTrackSearch extends Component {
+    state={
+        value:''
+    }
+    topTracksSearch=()=>{
+        const searchValue = this.state.value
+        axios.get(`https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=${searchValue}&api_key=${lfmKey}&format=json`).then(res => {
+           console.log(res.data)
+        })
+    }
+    handleChange = (e) => {
+        this.setState({
+            value: e.target.value
+        })
+    }
     
-
-    render() {
-        return (
-      
-        <div className="row">
-       
-      \
-        <div className="col-md-12 image-wrapper">
-        
-            <div className="image-results">
-              {this.props.results.slice(0,25).map(image => (
-                  <div>
-                      {console.log(this.props.result)}
-                      <a href = {image.user.links.html} alt="linktounsplash" target="_blank"> 
-                      <img className="img-list" src={image.urls.small} alt="searchresult"
-                           key={image.id}/>
-                          </a>
-      
-                         
-                  </div>
-
-              ))}
-     
-        </div>
-          </div>
-   
-          </div>
-         
-
-       
-        )
-      }
 
 
 
 
 }
 
-export default SearchResults
+export default TopTrackSearch
