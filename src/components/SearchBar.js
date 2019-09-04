@@ -4,7 +4,7 @@ import SearchResults from './SearchResults'
 import './style.css';
 import TopTracksDump from './TopTracksDump'
 import SearchBtn from './SearchBtn'
-
+import EventsBtn from './Instructions'
 
 // const API_KEY = process.env.REACT_APP_API_KEY; 
 const lfmKey = "e193748e40aa0cc6cfb11593cff93a81"
@@ -18,7 +18,12 @@ class SearchBar extends Component {
         artistName: '',
         artistImg: '',
         topTracks: [],
-      
+        upcomingEvents: {city: '',
+                         state:  '',
+                         venueName: '',
+                         date: ''
+                        }
+
     }
 
     artistSearch = () => {
@@ -53,6 +58,34 @@ class SearchBar extends Component {
         })
     }
 
+    eventsSearch = () => {
+        const searchValue = this.state.value
+        axios.get(`https://app.ticketmaster.com/discovery/v2/events.json?apikey=7elxdku9GGG5k8j0Xm8KWdANDgecHMV0&keyword=${searchValue}`).then(res => {
+        
+            //destructuring
+            // let { _embedded: { events, images, dates, venues } } = eventInfoResponse;
+
+            for (let i = 0; i < 6; i++) {
+                let eventInfoResponse = res.data._embedded.events[i];
+                console.log(eventInfoResponse)
+                let cityName = eventInfoResponse._embedded.venues[0].city.name
+                console.log(cityName)
+                this.setState(prevState => {
+                    let upcomingEvents = Object.assign({}, prevState.upcomingEvents);  // creating copy of state variable 
+                    upcomingEvents.city = cityName;                     // update the name property, assign a new value                 
+                    return { upcomingEvents };                                 // return new object 
+                  })
+                  
+                
+                // console.log(events[i]._embedded.venues[0].country.countryCode)
+                // console.log(events[i]._embedded.venues[0].name)
+                // console.log(events[i].dates.start.localDate)
+                //   console.log(moment(events[i].dates.start.localTime, "HH:mm:ss").format("h:mm A"))
+
+            }
+        })
+    }
+
 
     handleChange = (e) => {
         this.setState({
@@ -65,8 +98,13 @@ class SearchBar extends Component {
 
     }
     handleSubmitTT = (e) => {
+        e.preventDefault()
         this.topTracksSearch()
 
+    }
+    handleSubmitES=(e)=>{
+        e.preventDefault()
+        this.eventsSearch()
     }
 
 
@@ -91,28 +129,29 @@ class SearchBar extends Component {
                     </form>
 
                 </div>
-                <div className="jumbotron jumbotron-fluid bg-white" style={{'border-radius':'15px'}}>
+                <div className="jumbotron jumbotron-fluid bg-white" style={{ 'border-radius': '15px' }}>
                     <div className="container">
-                    <div className='row'>
-                    <div className='col-md-4'>
-                      <img src={artistImg}/>
-                    </div>
-                    <div className='col-md-8'>
-                      <h1 className="display-4 kanit">{artistName}</h1>
-                        <p className="lead kanit">{artistBio}</p>
-                        <SearchBtn onClick={this.handleSubmitTT} />
                         <div className='row'>
-                            {/* <p>{topTracks}</p> */}
-                            <ul className='kanit ttList'>
-                                {topTracks.map(function (trackArr, i) {
-                                    console.log('test');
-                                    return <li key={i}>{trackArr}</li>
-                                })}
-                            </ul>
-                        </div>
+                            <div className='col-md-4'>
+                                <img src={artistImg} />
+                            </div>
+                            <div className='col-md-8'>
+                                <h1 className="display-4 kanit">{artistName}</h1>
+                                <p className="lead kanit">{artistBio}</p>
+                                <SearchBtn onClick={this.handleSubmitTT} />
+                                {/* <EventsBtn onClick={this.handleSubmitES} />  */}
+                                <div className='row'>
+                                    {/* <p>{topTracks}</p> */}
+                                    <ul className='kanit ttList'>
+                                        {topTracks.map(function (trackArr, i) {
+                                            console.log('test');
+                                            return <li key={i}>{trackArr}</li>
+                                        })}
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         )

@@ -1,14 +1,10 @@
-import React  from 'react'
-import './style.css';
- class Instruction extends React.Component {
-  render() {
-    return (
-      <div>
-          <div className="instruction-text">
-          <p className="text">Enter A Keyword To View Images. Click On Any Photo to be Redirected to The Artist's Unsplash Page. </p>
-          </div>
-      </div>
+import React, { Component } from 'react'
+import './style.css'
+
+const EventsBtn =(props)=>{
+    return(
+        <button className="btn-success btn-large" onClick={props.onClick}style={{ 'border-radius': '5px', 'margin-right': '2px' }} type="submit"><i class="fa fa-search">Events</i></button>
     )
-  }
 }
-export default Instruction;
+
+export default EventsBtn
