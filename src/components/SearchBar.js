@@ -90,12 +90,12 @@ class SearchBar extends Component {
                     return { upcomingEvents };                                 // return new object 
                 })
                 this.setState({tableCity: 'City', tableCountry: 'Country', tableDate: 'Date', tableVenue: 'Venue'})
-
-
-                // console.log(events[i]._embedded.venues[0].country.countryCode)
-                // console.log(events[i]._embedded.venues[0].name)
-                // console.log(events[i].dates.start.localDate)
-                //   console.log(moment(events[i].dates.start.localTime, "HH:mm:ss").format("h:mm A"))
+                
+                if(this.state.upcomingEvents===undefined){
+                    this.setState({
+                        upcomingEvents:['No Upcoming Events']
+                    })
+                }
 
             }
         })
@@ -114,13 +114,13 @@ class SearchBar extends Component {
     }
     handleSubmitTT = (e) => {
         e.preventDefault()
-        this.setState({tableCity: '', tableCountry: '', tableDate: '', tableVenue: ''})
+        this.setState({upcomingEvents:'', tableCity: '', tableCountry: '', tableDate: '', tableVenue: ''})
         this.topTracksSearch()
 
     }
     handleSubmitES = (e) => {
         e.preventDefault()
-        this.setState({ toptracks: '' })
+        this.setState({ topTracks:[] })
         this.eventsSearch()
     }
 
@@ -140,7 +140,7 @@ class SearchBar extends Component {
                             id='search-bar'
                             style={{ 'border-radius': '5px', width: '30%', justifyContent: 'center' }}
                             value={this.state.value}
-                            placeholder="Search Musical Artists..."
+                            placeholder="Search Artists..."
                             onChange={this.handleChange} />
 
                         <button className="btn-success btn-large" style={{ 'border-radius': '5px', 'margin-right': '2px' }} type="submit">Search<i class="fa fa-search"></i></button>
